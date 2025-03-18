@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using DevOpsLais.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<DevOpsLaisContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DevOpsLaisContext") ?? throw new InvalidOperationException("Connection string 'DevOpsLaisContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
